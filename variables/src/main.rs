@@ -1,43 +1,91 @@
+use core::num;
+
 fn main() {
-    // Integer
-    let a: i32 = 16;
-    let b = 0xa;
-    let c = 0b1100;
-    let d = 0o14;
+    // let x = 5; default imutable
+    let mut x = 5;
+    println!("x: {}", x);
 
-    // Floats
-    let e = 34.3;
-    let f: f32 = 34.3;
+    x = 6;
+    println!("x {}", x);
 
-    // Boolean
-    let g: bool = true;
-    let h = false;
+    const COUNT: u32 = 10_000;
 
-    // Character
-    let i = 'a';
-    let j: char = 'e';
+    // shadowing
+    let y = 10;
+    println!("y: {}", y);
 
-    // Tuple
-    let tup = ("Jhon", 34);
+    let y = 30;
+    println!("y: {}", y);
 
-    // Destructure
-    let (name, age) = tup;
-    
-    // point
-    let age = tup.1;
+    let y = "ten";
+    println!("y: {}", y);
 
-    // Array
-    let arr = [1, 2, 4];
+    // Scalar Datatype
+
+    // integer (default i32)
+    let a = 10_000; // decimal
+    let b = 0xFF; // hex
+    let c = 0o10; // octal
+    let d = 0b1010; // binary
+    let e = b'A'; // u8 only
+
+    // decimals (default f64)
+    let f = 20.32323;
+    let g: f32 = 20.43;
+
+    // bool
+    let h = true;
+    let i = false;
+
+    // char
+    let j = 'A';
+    let k = '😍';
+
+    // Compound DataType
+
+    // tuple
+    let tup = ("Bob", 20);
+    let (name, age) = tup; // destructuring
+    println!("Name: {}, Age: {}", name, age);
+
+    let age = tup.1; // dot operation
+    println!("Age: {}", age);
+
+    // array
+    let arr = [1, 2, 3, 4];
     let ele = arr[0];
-    let new_array = [0; 8]; // [0, 0, 0, 0, 0, 0, 0, 0]
+    println!("Arrray Ele {}", ele);
 
-    const TIMEOUT: u32 = 34_000;
-    // const mut TIMEOUT: u32 = 34;
+    let arr2 = [0; 4]; // [0, 0, 0, 0]
 
-    let sum = my_fn(1, 2);
-    println!("{sum}");
+    // Function
+    let sum = my_fn(10, 10);
+    println!("Sum {}", sum);
 
+    // Conditions
+    let number = 10;
+    if number > 10 {
+        println!("greater than 10");
+    } else if number < 10 {
+        println!("less than 10");
+    } else {
+        println!("equal to 10");
+    }
+
+    let condition = true;
+    let value = if condition { 20 } else { 30 };
+
+    // Loops
+
+    // loop
     let mut count = 0;
+    // loop {
+    //     count += 1;
+    //     if count == 10 {
+    //         break;
+    //     }
+    // }
+
     let result = loop {
         count += 1;
         if count == 10 {
@@ -45,38 +93,33 @@ fn main() {
         }
     };
 
-    count = 0;
-    while count < 10 {
-        count += 1;
+    println!("Counter {}", result);
+
+    // while
+
+    let mut count = 3;
+    while count > 0 {
+        println!("Inside while");
+        count -= 1;
     }
 
-    println!("{}", count);
-
-    println!("Count: {}", result);
+    // for
 
     let arr = [10, 20, 30];
-    for ele in arr.iter() {
-        println!("Element: {}", ele)
+    for i in arr.iter() {
+        println!("I: {}", i);
     }
 
-    for i in 1..4 {
-        println!("{}!", i);
+    for num in 1..4 {
+        println!("#{}", num);
     }
-
-    println!("Fibo {}", fibo(7));
 }
 
 fn my_fn(x: i32, y: i32) -> i32 {
-    println!("Value of x: {}", x);
-    println!("Value of y: {}", y);
+    println!("x: {}", x);
+    println!("y: {}", y);
+    println!("My Funtion");
+
+    // return x + y;
     x + y
-}
-
-
-fn fibo(n: u32) -> u32 {
-    if n <= 1 {
-        return n;
-    }
-
-    return fibo(n-1) + fibo(n-2);
 }
