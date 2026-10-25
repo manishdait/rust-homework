@@ -1,32 +1,32 @@
-use std::io;
+use colored::*;
+use rand::RngExt;
 use std::cmp::Ordering;
-use rand::Rng;
+use std::io;
 
 fn main() {
     println!("Gussing Game");
+    let secret = rand::rng().random_range(1..101);
 
     loop {
         println!("Enter a number: ");
 
-        let secret_number = rand::thread_rng().gen_range(1, 101);
+        let mut guess = String::new();
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Error getting user number.");
 
-        let mut guess  = String::new();
-        io::stdin().read_line(&mut guess).expect("Error getting user input");
-
-        let guess:u32  = match guess.trim().parse() {
+        let guess: i32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => continue,
         };
 
-        println!("You guess {}", guess);
-
-        match guess.cmp(&secret_number) {
+        match guess.cmp(&secret) {
             Ordering::Equal => {
-                println!("Match");
+                println!("{}", "Equals, Won".green());
                 break;
-            },
-            Ordering::Greater => println!("Greater"),
-            Ordering::Less => println!("Lesser"),
-        };
-    };
+            }
+            Ordering::Less => println!("{}", "Less".red()),
+            Ordering::Greater => println!("{}", "Greater".red()),
+        }
+    }
 }
