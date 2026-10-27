@@ -1,5 +1,3 @@
-use core::num;
-
 fn main() {
     // let x = 5; default imutable
     let mut x = 5;
